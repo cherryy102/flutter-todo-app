@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+import 'package:todo_app/pages/SignInPage.dart';
+import 'package:todo_app/pages/SignUpPage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,33 +17,10 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  firebase_auth.FirebaseAuth firebaseAuth = firebase_auth.FirebaseAuth.instance;
-
-  void signUp() async {
-    try {
-      await firebaseAuth.createUserWithEmailAndPassword(
-          email: '', password: '');
-    } catch (e) {
-      print(e);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('ToDo app'),
-        ),
-        body: Center(
-          child: ElevatedButton(
-            onPressed: () {
-              signUp();
-            },
-            child: const Text('Sign up'),
-          ),
-        ),
-      ),
+    return const MaterialApp(
+      home: SignInPage(),
     );
   }
 }
