@@ -1,26 +1,24 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:todo_app/pages/SignInPage.dart';
-import 'package:todo_app/pages/SignUpPage.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:sqlite_todo_app/models/ToDo.dart';
+import 'package:sqlite_todo_app/screens/home.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Hive.initFlutter();
+  Hive.registerAdapter(ToDoAdapter());
+  await Hive.openBox('tasks');
+
   runApp(const MyApp());
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: SignInPage(),
+      home: Home(),
     );
   }
 }
